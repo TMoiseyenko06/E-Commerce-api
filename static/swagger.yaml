@@ -1,0 +1,559 @@
+swagger: '2.0'
+info:
+  title: "advanced_e_commerce_api"
+  description: ""
+  version: "1.0.0"
+host: "127.0.0.1:5000"
+schemes:
+ - "http"
+consumes:
+ - "application/json"
+produces:
+ - "application/json"
+securityDefinitions:
+  bearerAuth:
+    type: apiKey
+    name: Authorization
+    in: header
+paths:
+  /user/:
+    post:
+      tags:
+      - user
+      summary: "Create user"
+      description: "Create a user"
+      parameters: 
+        - in: "body"
+          name: "body"
+          description: "User Credentials"
+          required: true
+          schema:
+            $ref: "#/definitions/UserCredentials"
+      responses:
+        200:
+          description: "Default Response for Adding User"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "OK"
+              message: "User Added"
+        400:
+          description: "Default error response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "BAD"
+              message: "username already exists"
+    put:
+      tags:
+      - user
+      summary: "Edit a User"
+      description: "edit User Credentials"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "User Credentials"
+          required: true
+          schema:
+            $ref: "#/definitions/UserCredentialsId"
+      responses:
+        200:
+          description: "Default Response for Updating User"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "OK"
+              message: "User Updated"
+        400:
+          description: "Default error response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "BAD"
+              message: "username not found"
+        401:
+          description: "Default error response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "BAD"
+              message: "Token Not Found"
+    get:
+      tags:
+      - user
+      summary: "Get all Users"
+      description: "Get all of the avalible Users"
+      responses:
+        200:
+          description: "All Users"
+          schema:
+            $ref: "#/definitions/UserCredentialsId"
+        401:
+          description: "Default error response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "BAD"
+              message: "Token Not Found"
+  /user/<int:id>:
+    delete:
+      tags:
+       - user
+      summary: "Delete User"
+      description: "Get all of the avalible Users"
+      parameters:
+      - in: "path"
+        name: "id"
+        type: "integer"
+        required: true
+      responses:
+        200:
+          description: "User Deleted"
+          schema: 
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+              application/json:
+                status: "OK"
+                message: "User Deleted"
+        400:
+          description: "Default error response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "BAD"
+              message: "user not found"
+        401:
+          description: "Default error response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "BAD"
+              message: "Token Not Found"
+    get:
+      tags:
+      - user
+      summary: "Get One User"
+      parameters:
+      - in: "path"
+        name: "id"
+        type: "integer"
+        required: true
+      responses:
+        200:
+          description: "User"
+          schema: 
+            $ref: "#/definitions/UserCredentialsId"
+        400:
+          description: "Default error response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "BAD"
+              message: "user not found"
+        401:
+          description: "Default error response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "BAD"
+              message: "Token Not Found"
+  /product:
+    post:
+      tags:
+      - product
+      summary: "Create product"
+      description: "Create a product"
+      parameters: 
+        - in: "body"
+          name: "body"
+          description: "product Credentials"
+          required: true
+          schema:
+            $ref: "#/definitions/ProductCredentials"
+      responses:
+        200:
+          description: "Default Response for Adding product"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "OK"
+              message: "product Added"
+        400:
+          description: "Default error response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "BAD"
+              message: "username already exists"
+    put:
+      tags:
+      - product
+      summary: "Edit a product"
+      description: "edit product Credentials"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "product Credentials"
+          required: true
+          schema:
+            $ref: "#/definitions/ProductCredentialsId"
+      responses:
+        200:
+          description: "Default Response for Updating product"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "OK"
+              message: "product Updated"
+        400:
+          description: "Default error response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "BAD"
+              message: "product not found"
+        401:
+          description: "Default error response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "BAD"
+              message: "Token Not Found"
+    get:
+      tags:
+      - product
+      summary: "Get all products"
+      description: "Get all of the avalible products"
+      responses:
+        200:
+          description: "All Users"
+          schema:
+            $ref: "#/definitions/ProductCredentialsId"
+        401:
+          description: "Default error response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "BAD"
+              message: "Token Not Found"
+  /product/<int:id>:
+    delete:
+      tags:
+       - product
+      summary: "Delete product"
+      description: "Get all of the avalible products"
+      parameters:
+      - in: "path"
+        name: "id"
+        type: "integer"
+        required: true
+      responses:
+        200:
+          description: "product Deleted"
+          schema: 
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+              application/json:
+                status: "OK"
+                message: "product Deleted"
+        400:
+          description: "Default error response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "BAD"
+              message: "product not found"
+        401:
+          description: "Default error response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "BAD"
+              message: "Token Not Found"
+    get:
+      tags:
+      - product
+      summary: "Get One product"
+      parameters:
+      - in: "path"
+        name: "id"
+        type: "integer"
+        required: true
+      responses:
+        200:
+          description: "product"
+          schema: 
+            $ref: "#/definitions/ProductCredentialsId"
+        400:
+          description: "Default error response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "BAD"
+              message: "user not found"
+        401:
+          description: "Default error response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "BAD"
+              message: "Token Not Found"
+  /Order:
+    post:
+      tags:
+      - Order
+      summary: "Create Order"
+      description: "Create a Order"
+      parameters: 
+        - in: "body"
+          name: "body"
+          description: "Order Credentials"
+          required: true
+          schema:
+            $ref: "#/definitions/OrderCredentials"
+      responses:
+        200:
+          description: "Default Response for Adding Order"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "OK"
+              message: "Order Added"
+        400:
+          description: "Default error response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "BAD"
+              message: "Order already exists"
+    put:
+      tags:
+      - Order
+      summary: "Edit a Order"
+      description: "edit Order Credentials"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Order Credentials"
+          required: true
+          schema:
+            $ref: "#/definitions/OrderCredentialsId"
+      responses:
+        200:
+          description: "Default Response for Updating Order"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "OK"
+              message: "Order Updated"
+        400:
+          description: "Default error response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "BAD"
+              message: "Order not found"
+        401:
+          description: "Default error response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "BAD"
+              message: "Token Not Found"
+    get:
+      tags:
+      - Order
+      summary: "Get all Orders"
+      description: "Get all of the avalible Orders"
+      responses:
+        200:
+          description: "All Users"
+          schema:
+            $ref: "#/definitions/OrderCredentialsId"
+        401:
+          description: "Default error response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "BAD"
+              message: "Token Not Found"
+  /Order/<int:id>:
+    delete:
+      tags:
+       - Order
+      summary: "Delete Order"
+      description: "Get all of the avalible Orders"
+      parameters:
+      - in: "path"
+        name: "id"
+        type: "integer"
+        required: true
+      responses:
+        200:
+          description: "Order Deleted"
+          schema: 
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+              application/json:
+                status: "OK"
+                message: "Order Deleted"
+        400:
+          description: "Default error response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "BAD"
+              message: "Order not found"
+        401:
+          description: "Default error response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "BAD"
+              message: "Token Not Found"
+    get:
+      tags:
+      - Order
+      summary: "Get One Order"
+      parameters:
+      - in: "path"
+        name: "id"
+        type: "integer"
+        required: true
+      responses:
+        200:
+          description: "Order"
+          schema: 
+            $ref: "#/definitions/OrderCredentialsId"
+        400:
+          description: "Default error response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "BAD"
+              message: "Order not found"
+        401:
+          description: "Default error response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          examples:
+            application/json:
+              status: "BAD"
+              message: "Token Not Found"
+
+definitions:  
+  UserCredentials:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        description: "User Name"
+      roles:
+        type: "array"
+        description: "List of Roles"
+        items:
+          type: 'integer'
+      username:
+        type: "string"
+        description: "username of user"
+      password:
+        type: "string"
+        description: "password of User"
+  UserCredentialsId:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        description: "User Id"
+      name:
+        type: "string"
+        description: "User Name"
+      roles:
+        type: "array"
+        description: "List of Roles"
+        items:
+          type: 'integer'
+      username:
+        type: "string"
+        description: "username of user"
+      password:
+        type: "string"
+        description: "password of User"
+  DefaultResponse:
+    type: "object"
+    properties:
+      status:
+        type: "string"
+        description: "status of response"
+      message:
+        type: "string" 
+        description: "message from response" 
+  ProductCredentials:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      description: 
+        type: "string"
+      price:
+        type: "string"
+  ProductCredentialsId:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      description: 
+        type: "string"
+      price:
+        type: "string"
+  OrderCredentials:
+    type: 'object'
+    properties:
+      user_id:
+        type: "integer"
+        description: "user id of Order"
+      products:
+        type: "array"
+        items:
+          type: "integer" 
+  OrderCredentialsId:
+    type: 'object'
+    properties:
+      user_id:
+        type: "integer"
+        description: "user id of Order"
+      products:
+        type: "array"
+        items:
+          type: "integer"
